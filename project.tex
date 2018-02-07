@@ -64,6 +64,17 @@
 The following document contains the instructions for \projectname{} for \modulename{}.
 Please be advised that all students are bound by the Quality Assurance Framework~\cite{gmitqaf} at GMIT which includes the Code of Student Conduct and the Policy on Plagiarism.
 
+\subsection*{Problem statement}
+You must write a program in the Go programming language~\cite{golang} that builds non-deterministic finite automata (NFAs) rom regular expressions and can execute these against strings of text.
+You must write the program from scratch, and cannot use the regexp package from the Go standard library nor any other external library.
+
+\begin{minted}{sh}
+$ gorego "0*(010)1*" "0000101"
+Match
+$ gorego "0*(101|010)1*" "1111"
+No match    
+\end{minted}
+
 
 \subsection*{Minimum Viable Project}
 The minimum standard for this project is a GitHub repository containing a single Go program that can execute regular expressions against strings.
