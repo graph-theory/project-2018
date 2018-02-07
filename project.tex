@@ -65,23 +65,50 @@ The following document contains the instructions for \projectname{} for \modulen
 Please be advised that all students are bound by the Quality Assurance Framework~\cite{gmitqaf} at GMIT which includes the Code of Student Conduct and the Policy on Plagiarism.
 
 \subsection*{Problem statement}
-You must write a program in the Go programming language~\cite{golang} that builds non-deterministic finite automata (NFAs) rom regular expressions and can execute these against strings of text.
-You must write the program from scratch, and cannot use the regexp package from the Go standard library nor any other external library.
+You must write a program in the Go programming language~\cite{golang} that builds non-deterministic finite automata (NFAs) from regular expressions and that can execute these against strings of text.
+You must write the program from scratch, and cannot use the \mintinline{go}{regexp} package from the Go standard library nor any other external library.
 
-\begin{minted}{sh}
-$ gorego "0*(010)1*" "0000101"
-Match
-$ gorego "0*(101|010)1*" "1111"
-No match    
+A regular expression is a string containing a series of characters, some with special meaning.
+The three characters $.$, $|$, and $*$ represent concatenate, or, and Kleene star respectively.
+For example, $0.1$ means a $0$ followed by a $1$, $0|1$ means a $0$ or a $1$, and $1*$ means ``any number of $1$'s''.
+Other special characters you might consider allowing as input are brackets $()$, which can be used for grouping, $+$ which means ``at least one of'', and $?$ which means ``zero or one of''.
+You may initially restrict the other characters in your alphabet to $0$ and $1$, if you wish.
+However, you should at least attempt to expand these to all of the digits, and the characters $a$ to $z$
+
+You will have to break the project into a number of tasks:
+\begin{itemize}
+  \item Parse the regular expression from infix to postfix.
+  \item Build a series of small NFA's for parts of the regular expression.
+  \item Create the overall NFA.
+  \item Implement the matching algorithm.
+\end{itemize}
+A series of videos will be provided to students to help them with the project.
+Overall your program might have the following layout.
+
+\begin{minted}{go}
+type nfa struct {
+  ...
+}
+func regexcompile(r string) nfa {
+  ...
+  return n
+}
+func (n nfa) regexmatch(n nfa, r sting) bool {
+  ...
+  return ismatch
+}
+func main() {
+  n := regexcompile("01*0")
+  t := n.regexmatch("01110")
+  f := n.regexmatch("1000001")
+}
 \end{minted}
 
 
 \subsection*{Minimum Viable Project}
-The minimum standard for this project is a GitHub repository containing a single Go program that can execute regular expressions against strings.
-
+The minimum standard for this project is a GitHub repository containing a single Go program that can execute regular expressions against strings over the alphabet ${0,1}$ and with the special characters $.$, $|$, and $*$.
 The README should clearly document how to compile, run and test your program.
 It should also explain how your program works, and how you wrote it.
-
 A better project will be well organised and contain detailed explanations.
 The architecture of the system will be well conceived, and examples of running the program will be provided.
 
